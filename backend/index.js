@@ -8,22 +8,28 @@ const app = express();
 
 // Middleware for parsing request body
 app.use(express.json());
-app.use(cors({
-  origin: ["https://book-tracker-backend-six.vercel.app/"],
-  methods: ["POST", "GET"],
-  credentials: true
-}));
 
+// Middleware for handling CORS POLICY
+// Option 1: Allow All Origins with Default of cors(*)
+app.use(cors());
+// Option 2: Allow Custom Origins
+// app.use(
+//   cors({
+//     origin: 'http://localhost:3000',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-Type'],
+//   })
+// );
 
 app.get('/', (request, response) => {
   console.log(request);
-  return response.status(234).send('Hey hey');
+  return response.status(234).send('hey hey');
 });
-
+  
 app.use('/books', booksRoute);
 
 mongoose
-  .connect("mongodb+srv://nivedhan9895:mKgooGnGUKXoHeyH@cluster0.moaqv27.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+  .connect(mongoDBURL)
   .then(() => {
     console.log('App connected to database');
     app.listen(PORT, () => {
