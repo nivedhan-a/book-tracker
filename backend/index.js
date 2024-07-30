@@ -12,21 +12,21 @@ app.use(express.json());
 
 // Middleware for handling CORS POLICY
 // Option 1: Allow All Origins with Default of cors(*)
-//app.use(cors());
+// app.use(cors());
 // Option 2: Allow Custom Origins
 app.use(
   cors({
-    origin: 'https://book-tracker-backend-beta.vercel.app/books',
+    origin: 'https://book-tracker-frontend-chi.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-   allowedHeaders: ['Content-Type'],
+    allowedHeaders: ['Content-Type'],
   })
 );
 
 app.get('/', (request, response) => {
   console.log(request);
-  return response.status(234).send('hey hey');
+  return response.status(200).send('hey hey');
 });
-  
+
 app.use('/books', booksRoute);
 
 mongoose
