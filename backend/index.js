@@ -8,7 +8,11 @@ const app = express();
 
 // Middleware for parsing request body
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: [""],
+  methods: ["POST", "GET"],
+  credentials: true
+}));
 
 
 app.get('/', (request, response) => {
@@ -19,7 +23,7 @@ app.get('/', (request, response) => {
 app.use('/books', booksRoute);
 
 mongoose
-  .connect("mongodb://localhost:27017")
+  .connect("mongodb+srv://nivedhan9895:mKgooGnGUKXoHeyH@cluster0.moaqv27.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => {
     console.log('App connected to database');
     app.listen(PORT, () => {
