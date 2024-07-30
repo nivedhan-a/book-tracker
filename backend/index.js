@@ -9,7 +9,7 @@ const app = express();
 // Middleware for parsing request body
 app.use(express.json());
 app.use(cors({
-  origin: [""],
+  origin: ["https://book-tracker-backend-mauve.vercel.app/"],
   methods: ["POST", "GET"],
   credentials: true
 }));
