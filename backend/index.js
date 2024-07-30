@@ -16,7 +16,7 @@ app.use(express.json());
 // Option 2: Allow Custom Origins
 app.use(
   cors({
-    origin: 'https://book-tracker-frontend-chi.vercel.app',
+    origin: 'https://book-tracker-frontend-chi.vercel.app/',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
    allowedHeaders: ['Content-Type'],
   })
