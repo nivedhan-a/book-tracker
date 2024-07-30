@@ -20,7 +20,7 @@ const CreateBooks = () => {
       publishYear,
     };
     setLoading(true);
-    axios
+    axios.defaults.withCredentials = true
       .post('https://book-tracker-backend-beta.vercel.app/books', data)
       .then(() => {
         setLoading(false);
