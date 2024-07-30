@@ -13,7 +13,7 @@ const DeleteBook = () => {
 
   const handleDeleteBook = () => {
     setLoading(true);
-    axios
+    aaxios.defaults.withCredentials = true
       .delete(`https://book-tracker-backend-beta.vercel.app/books/${id}`)
       .then(() => {
         setLoading(false);

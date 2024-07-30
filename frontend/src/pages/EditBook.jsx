@@ -16,7 +16,8 @@ const EditBook = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`https://book-tracker-backend-beta.vercel.app/books/${id}`)
+    axios.defaults.withCredentials = true
+    .get(`https://book-tracker-backend-beta.vercel.app/books/${id}`)
     .then((response) => {
         setAuthor(response.data.author);
         setPublishYear(response.data.publishYear)
@@ -36,7 +37,7 @@ const EditBook = () => {
       publishYear,
     };
     setLoading(true);
-    axios
+    axios.defaults.withCredentials = true
       .put(`https://book-tracker-backend-beta.vercel.app/books/${id}`, data)
       .then(() => {
         setLoading(false);

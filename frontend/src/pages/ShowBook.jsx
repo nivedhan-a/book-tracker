@@ -11,7 +11,7 @@ const ShowBook = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios
+    axios.defaults.withCredentials = true
       .get(`http://localhost:5555/books/${id}`)
       .then((response) => {
         setBook(response.data);

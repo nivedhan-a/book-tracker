@@ -15,7 +15,7 @@ const Home = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios
+    axios.defaults.withCredentials = true
       .get('https://book-tracker-backend-beta.vercel.app/books')
       .then((response) => {
         setBooks(response.data.data);
