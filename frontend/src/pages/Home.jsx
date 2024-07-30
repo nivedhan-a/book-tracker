@@ -2,31 +2,33 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Spinner from '../components/Spinner';
 import { Link } from 'react-router-dom';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { BsInfoCircle } from 'react-icons/bs';
-import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
+import { MdOutlineAddBox } from 'react-icons/md';
 import BooksTable from '../components/home/BooksTable';
 import BooksCard from '../components/home/BooksCard';
+import { useSnackbar } from 'notistack';
 
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState('table');
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     setLoading(true);
-    axios.defaults.withCredentials = true
-      .get('https://book-tracker-backend-beta.vercel.app/books')
+    axios.defaults.withCredentials = true; 
+    axios.get('https://book-tracker-backend-beta.vercel.app/books')
       .then((response) => {
-        setBooks(response.data.data);
+        setBooks(response.data.data); // Adjust if necessary based on the API response structure
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
         setLoading(false);
+        const errorMessage = error.response?.data?.message || 'Failed to load books';
+        enqueueSnackbar(errorMessage, { variant: 'error' });
+        console.log(error);
       });
-  }, []);
-
+  }, [enqueueSnackbar]); // Include `enqueueSnackbar` in the dependency array
+  
   return (
     <div className='p-4'>
       <div className='flex justify-center items-center gap-x-4'>
